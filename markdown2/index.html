@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+	<head>
+        <meta charset="utf-8">
+         <title>Using Showdown with and without jQuery: demo</title>
+         <style>
+            textarea, #preview  { 
+				width: 500px; 
+				height: 150px; 
+				margin-bottom: 1em; 
+				padding: .5em 1em; 
+				overflow-y:auto }
+            
+			#preview { 
+				border: 1px solid #666; }
+		</style>
+		
+		<link rel="first" href="http://mathiasbynens.be/notes/showdown-javascript-jquery" title="Using Showdown with and without jQuery">
+        <link rel="prefetch" href="http://mathiasbynens.be/notes/showdown-javascript-jquery" title="Using Showdown with and without jQuery">
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/default.min.css">
+	</head>
+	<body>
+		<p>Based on <a href="http://mathiasbynens.be/">Mathias Bynens</a> 
+		original work and edited by <a href="http://blog.millermedeiros.com">
+		Miller Medeiros</a> to add GitHub-style codeblock support with syntax highlighting.</p>
+        <p>For more information, read <a href="http://mathiasbynens.be/notes/showdown-javascript-jquery" 
+       	title="Using Showdown with and without jQuery">Using Showdown with and without jQuery</a>.</p>
+        <textarea autofocus>
+This is a **test**.
+  
+```javascript
+var foo = "lorem ipsum";
+
+function bar(){
+ dolor();
+ ipsum();
+}
+
+var lorem = 123;
+```
+
+lorem ipsum dolor sit amet
+        </textarea>
+        <script src="http://pagedown.googlecode.com/hg/Markdown.Converter.js"></script>
+        <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+<script>
+(function() {
+
+  // When using more than one `textarea` on your page, change the following line to match the one you’re after
+  var textarea = document.getElementsByTagName('textarea')[0],
+      preview = document.createElement('div'),
+      converter = new Markdown.Converter().makeHtml,
+      content = '',
+      codeBlockTimeout;
+
+  function update() {
+    // throttle update since syntax highlight is expensive
+    if (codeBlockTimeout) {
+      clearInterval(codeBlockTimeout);
+    }
+    codeBlockTimeout = setTimeout(fullUpdate, 200); 
+  }
+
+  function fullUpdate() {
+    content = normalizeLineBreaks(textarea.value);
+    preview.innerHTML = converter(convertCodeBlocks(content));
+  }
+
+  // Continue only if the `textarea` is found
+  if (textarea) {
+   preview.id = 'preview';
+   // Insert the preview `div` after the `textarea`
+   textarea.parentNode.insertBefore(preview, textarea.nextSibling);
+   textarea.oninput = function() {
+    textarea.onkeyup = null;
+    update();
+   };
+   textarea.onkeyup = update;
+   // Trigger the `onkeyup` event
+   textarea.onkeyup.call(textarea);
+  }
+
+  //borrowed from amd-utils (http://millermedeiros.github.com/amd-utils)
+  //author: Miller Medeiros
+  function normalizeLineBreaks(str, lineEnd) {
+    lineEnd = lineEnd || '\n';
+    return str
+            .replace(/\r\n/g, lineEnd) // DOS
+            .replace(/\r/g, lineEnd) // Mac
+            .replace(/\n/g, lineEnd); // Unix
+  }
+
+  //based on mdoc parser code (https://github.com/millermedeiros/mdoc/)
+  //author: Miller Medeiros
+  function convertCodeBlocks(mdown){
+    // showdown have issues with github style code blocks..
+    // it would be great if JS RegExp didn't sucked that much
+    // could solve the same task with the RegExp: /^`{3}(\w*)([\w\W]*)^`{3}/gm
+
+    var startIndex = mdown.indexOf('```'),
+        endIndex,
+        codeBlock,
+        highlightedCode,
+        wrapCode = function(str, p1, p2){
+          if (p1) {
+            try {
+              highlightedCode = hljs.highlight(p1, p2).value;
+            } catch(err) {
+              //if language ins't defined it will throw errors
+              highlightedCode = hljs.highlightAuto(p2).value;
+            }
+          } else {
+            highlightedCode = hljs.highlightAuto(p2).value;
+          }
+          return '<pre><code>\n'+ highlightedCode +'</code></pre>';
+        };
+
+    while(startIndex !== -1){
+      endIndex = mdown.indexOf('```', startIndex + 1);
+      if (endIndex === -1) {
+        break;
+      }
+      codeBlock = mdown
+                      .substring(startIndex, endIndex)
+                      .replace(/`{3}([\-\w]*)\n([\w\W]+)/g, wrapCode);
+
+      mdown = mdown.substring(0, startIndex) + codeBlock + mdown.substring(endIndex + 3);
+      startIndex = mdown.indexOf('```');
+    }
+
+    return mdown;
+  }
+
+}());
+</script>
+    </body>
+</html>
