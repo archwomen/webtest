@@ -1,7 +1,7 @@
 <?php
 // Text Feilds that correspond to the html form
-$author    = @$_POST['author']
-$email     = @$_POST['email']
+$author    = @$_POST['author'];
+$email     = @$_POST['email'];
 $title     = @$_POST['title'];
 $date      = @$_POST['date'];
 $excerpt   = @$_POST['excerpt'];
