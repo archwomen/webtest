@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>Test Page</title>
+	</head>
+	<body>
+		<h2>Test Page for SSI</h2>
+		<p>Server Time is: <!--#echo var="DATE_LOCAL" --></p>
+		<p>Your IP: <!--#echo var="REMOTE_ADDR" --></p>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Submit Post</title>
+		<link rel="stylesheet" type="text/css" media="all" href="default.css" />
+	</head>
+    <body>
+	    <header>
+		    <h1>Submit Markdown Post Below</h1>
+		    <nav>
+			    <ul>
+				    <li><a href="/">Home</a></li>
+				    <li><a href="/about">About</a></li>
+				    <li><a href="/contact">Contact</a></li>
+			    </ul>
+		    </nav>
+	    </header>
+	    <div id="content">
+		    <aside>
+			    <p> Here is some information in the sidebar </p>
+		    </aside>
+		    <article>
+				<h1>Submit Blog Post to Arch Linux Women</h1>
+				<h2>Markdown Cheatsheet</h2>
+                <p>place cheatsheet here</p>
+				<h2>Submission Form</h2>
+				<p>The post submission form below is pretty straight forward. 
+				If you do not want your name/nick associated with a post you
+				can set the "Author" field to "guest" or "anonymous". Your email
+				address will not be posted and we will only use it to contact
+				you when the post is approved or to make edits. This form will
+				not add you to a mailing list of any kind. Please write the post
+				body in markdown format. There is example markdown syntax
+				above.</p>
+                    <form name="submit" action="save.php" method="post">
+						<table style="width=100%">
+							<tr>
+								<td>Author:</td>
+								<td><input type="text" name="author"></td>
+								<td>E-mail:</td>
+								<td><input type="text" name="email"></td>
+							</tr>
+							<tr>
+								<td>Title:</td> 
+								<td><input type="text" name="title"></td>
+								<td>Date (MM/DD/YYYY):</td> 
+								<td><input type="text" name="date"></td>
+							</tr>
+							<tr>
+								<td colspan="1">Excerpt:</td> 
+								<td colspan="2"><input type="text" name="excerpt" style="padding-right:101%;"></td>
+							</tr>
+							<tr>
+								<td>Tags (comma separated):</td>
+                                <td><input type="text" name="tags"></td>
+							</tr>
+							<tr>
+								<td colspan="1" style="vertical-align: top">Post Body:</td> 
+								<td colspan="3"><textarea rows="20" cols="82" name="comment">
+## Title
+
+Add your post here.
+								</textarea></td>
+							</tr>
+							<tr>
+								<td colspan="4" style="text-align: right"><input type="submit" value=" Save "></td>
+							</tr>
+						</table>
+                    </form>
+		    </article>
+	    </div>
+	    <footer>
+	        <p>Put copyright and site contact here.</p>
+	    </footer>
+    </body>
+</html>
