@@ -56,7 +56,7 @@
 							</tr>
 							<tr>
 								<td colspan="1" style="vertical-align: top">Post Body:</td> 
-								<td colspan="3"><textarea rows="20" cols="82" name="comment">
+								<td colspan="3"><textarea rows="20" cols="82" name="comment" id="text-input" oninput="this.editor.update()">
 ## Title
 
 Add your post here.
@@ -66,8 +66,21 @@ Add your post here.
 								<td colspan="4" style="text-align: right"><input type="submit" value=" Save "></td>
 							</tr>
 						</table>
-                    </form>
-		    </article>
+					</form>
+					<div id="preview"></div>
+					<script src="markdown.js"></script>
+		            <script>
+                        function Editor(input, preview) {
+                            this.update = function () {
+                                preview.innerHTML = markdown.toHTML(input.value);
+                            };
+                            input.editor = this;
+                            this.update();
+                        }
+                        var $ = function (id) { return document.getElementById(id); };
+                        new Editor($("text-input"), $("preview"));
+                    </script>
+            </article>
 	    </div>
 	    <footer>
 	        <p>Put copyright and site contact here.</p>
