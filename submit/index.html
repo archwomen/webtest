@@ -47,27 +47,32 @@
 								<td><input type="text" name="date"></td>
 							</tr>
 							<tr>
-								<td colspan="1">Excerpt:</td> 
+								<td colspan="1">Post Summary:</td> 
 								<td colspan="2"><input type="text" name="excerpt" style="padding-right:101%;"></td>
 							</tr>
 							<tr>
-								<td>Tags (comma separated):</td>
-                                <td><input type="text" name="tags"></td>
+								<td colspan="1">Tags (comma separated):</td>
+                                <td colspan="2"><input type="text" name="tags"></td>
 							</tr>
 							<tr>
-								<td colspan="1" style="vertical-align: top">Post Body:</td> 
-								<td colspan="3"><textarea rows="20" cols="82" name="comment" id="text-input" oninput="this.editor.update()">
+								<td colspan="2" style="vertical-align: top">Post Body:</td>
+								<td>Preview:</td>
+								<td style="text-align: right"><input type="submit" value=" Save "></td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea name="comment" id="text-input" oninput="this.editor.update()">
 ## Title
 
 Add your post here.
 								</textarea></td>
+								<td colspan="2"> <div id="preview"></div></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td colspan="4" style="text-align: right"><input type="submit" value=" Save "></td>
-							</tr>
+							</tr> -->
 						</table>
 					</form>
-					<div id="preview"></div>
+					<!-- <div id="preview"></div> -->
 					<script src="markdown.js"></script>
 		            <script>
                         function Editor(input, preview) {
