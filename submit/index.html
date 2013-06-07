@@ -55,24 +55,23 @@
                                 <td colspan="2"><input type="text" name="tags"></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="vertical-align: top">Post Body:</td>
+								<td>Post Body:</td>
+								<td><input type="submit" value=" Save "></td>
 								<td>Preview:</td>
-								<td style="text-align: right"><input type="submit" value=" Save "></td>
+								<td style="text-align: right"><input type="live" value=" Live ">
+									                          <input type="html" value=" Html ">
+								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><textarea name="comment" id="text-input" oninput="this.editor.update()">
+								<td colspan="2"><textarea rows="50" name="comment" id="text-input" oninput="this.editor.update()">
 ## Title
 
 Add your post here.
 								</textarea></td>
-								<td colspan="2"> <div id="preview"></div></td>
+								<td colspan="2"> <div id="preview" style="vertical-align: top"></div></td>
 							</tr>
-							<!-- <tr>
-								<td colspan="4" style="text-align: right"><input type="submit" value=" Save "></td>
-							</tr> -->
 						</table>
 					</form>
-					<!-- <div id="preview"></div> -->
 					<script src="markdown.js"></script>
 		            <script>
                         function Editor(input, preview) {
