@@ -59,7 +59,7 @@
 								<td><input type="submit" value=" Save "></td>
 								<td>Preview:</td>
 								<td style="text-align: right"><button type="button" onclick=" " >Live</button>
-									                          <button type="button" onclick=" " >Html</button>
+									                          <button type="button" onclick="transformTag('preview');" value="transform">Html</button>
 								</td>
 							</tr>
 							<tr>
@@ -83,7 +83,19 @@ Add your post here.
                         }
                         var $ = function (id) { return document.getElementById(id); };
                         new Editor($("text-input"), $("preview"));
-                    </script>
+					</script>
+					<script>
+                        function transformTag(tagId){
+                            var elem = document.getElementById(tagId);
+                            var children = elem.childNodes;
+                            var parent = elem.parentNode;
+                            var newNode = document.createElement("textarea readonly id="preview"");
+                            for(var i=0;i<children.length;i++){
+                                newNode.appendChild(children[i]);
+                                }
+                            parent.replaceChild(newNode,elem);
+                        }
+					</script>
             </article>
 	    </div>
 	    <footer>
